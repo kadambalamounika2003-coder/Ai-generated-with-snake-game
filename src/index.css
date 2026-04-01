@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --animate-eq: eq 1s ease-in-out infinite alternate;
+  
+  @keyframes eq {
+    0% { height: 20%; }
+    100% { height: 100%; }
+  }
+}
+
+body {
+  font-family: 'VT323', monospace;
+  background-color: #000;
+  color: #0ff;
+  text-transform: uppercase;
+}
+
+.font-digital {
+  font-family: 'VT323', monospace;
+}
+
+@keyframes glitch-anim {
+  0% { text-shadow: -4px 0 0 #0ff, 4px 0 0 #f0f; transform: translate(0); }
+  20% { text-shadow: 4px 0 0 #0ff, -4px 0 0 #f0f; transform: translate(-2px, 2px); }
+  40% { text-shadow: -4px 0 0 #0ff, 4px 0 0 #f0f; transform: translate(2px, -2px); }
+  60% { text-shadow: 4px 0 0 #0ff, -4px 0 0 #f0f; transform: translate(-2px, -2px); }
+  80% { text-shadow: -4px 0 0 #0ff, 4px 0 0 #f0f; transform: translate(2px, 2px); }
+  100% { text-shadow: 4px 0 0 #0ff, -4px 0 0 #f0f; transform: translate(0); }
+}
+
+.glitch-text {
+  animation: glitch-anim 0.2s linear infinite;
+  position: relative;
+}
+
+.glitch-text-slow {
+  animation: glitch-anim 2s linear infinite;
+  position: relative;
+}
+
+/* Screen tear & static noise simulation */
+.screen-tear {
+  position: relative;
+}
+.screen-tear::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.05) 2px,
+    rgba(255, 0, 255, 0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 50;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+.scanline-effect {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 15px;
+  background: rgba(255, 0, 255, 0.4);
+  opacity: 0.5;
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
